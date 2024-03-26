@@ -68,7 +68,7 @@ A_c = [J_c, zeros(4, 4), zeros(4, 4)];
 b_c = -dJ_c*dq;%dim=4
 
 % Body motion
-kp_b = 0.01;
+kp_b = 0.1;
 kd_b = 2*sqrt(kp_b);
 dw_star_B = kp_b*(p_star_B - p_B) + kd_b*(w_star_B - w_B);
 A_b = [J_B, zeros(3, 4), zeros(3, 4)];
@@ -80,7 +80,7 @@ b_b = dw_star_B - dJ_B*dq;%dim=3
 q0 = [0 0.5 0 0.9 -1.5 -0.9 1.5]'; % [7x1] Default generalized coordinates
 
 %q0 = [0 0.50 0 0.9 -1.5 0.9 -1.5]'; % [7x1] Default generalized coordinates
-kp_0 = 0.01;
+kp_0 = 0.1;
 kd_0 = 2*sqrt(kp_0);
 A_0 = [eye(7), zeros(7, 4), zeros(7, 4)];
 b_0 = kp_0*(q0 - q) - kd_0*dq;%dim=7
@@ -113,12 +113,12 @@ d_f_c = zeros(6, 1);%dim={0, 1, 2}
 %% Assemble and solve
 
 % Define hierarchy of tasks
-A = {A_eom, A_c, A_b, A_0, A_tau, A_f_c};
-b = {b_eom, b_c, b_b, b_0, b_tau, b_f_c};
+% A = {A_eom, A_c, A_b, A_0, A_tau, A_f_c};
+% b = {b_eom, b_c, b_b, b_0, b_tau, b_f_c};
 
 % A = {A_eom, A_c, A_b, A_tau, A_f_c};
 % b = {b_eom, b_c, b_b, b_tau, b_f_c};
-% 
+
 % A = { A_c, A_b, A_eom, A_0, A_tau, A_f_c};
 % b = { b_c, b_b, b_eom, b_0, b_tau, b_f_c};
 
